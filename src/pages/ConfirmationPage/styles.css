@@ -1,0 +1,48 @@
+.submit-button {
+   width: 352px;
+   height: 80px;
+   background: #6e5be2;
+   border: 0.5px solid #5141b3;
+   box-sizing: border-box;
+   box-shadow: 0px 2px 4px rgba(110, 91, 226, 0.3);
+   border-radius: 4px;
+}
+.button-label {
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+   font-weight: 400;
+   text-transform: none;
+}
+.button-left {
+   flex-direction: row;
+   display: flex;
+   align-items: center;
+   font-size: 16px;
+   line-height: 26px;
+}
+.round-chck {
+   display: flex;
+   width: 16px;
+   height: 16px;
+   background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
+   border: 1px solid #61ad15;
+   box-sizing: border-box;
+   border-radius: 16px;
+   margin-right: 12px;
+}
+.button-right {
+   display: flex;
+   flex-direction: column;
+   text-align: right;
+}
+.button-right--top {
+   font-size: 13px;
+   line-height: 21px;
+   font-weight: 300;
+}
+.button-right--bot {
+   font-size: 16px;
+   line-height: 26px;
+   font-weight: 500;
+}

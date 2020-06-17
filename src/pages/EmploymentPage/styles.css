@@ -1,0 +1,13 @@
+.employment-header {
+   width: 544px;
+   height: 120px;
+   margin: 32px 0;
+   text-align: center;
+}
+
+label.MuiFormControlLabel-root {
+   margin: 0px;
+   padding: 24px;
+   width: 544px;
+   box-shadow: inset 0px -1px 0px #dee0e8;
+}
