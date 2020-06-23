@@ -2,7 +2,6 @@ import { SET_EMPLOYMENT, SET_PROPRIETORSHIPS, SET_STATUS } from './types';
 
 
 const inititalState = {
-   progressBar: 0,
    employment: '',
    proprietorships: '',
    status: {}
