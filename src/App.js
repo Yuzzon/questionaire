@@ -5,9 +5,10 @@ import { Routes } from './Routes';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './redux/reducer'
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const store = createStore(
-   reducer
+   reducer, composeWithDevTools()
 );
 
 function App() {
