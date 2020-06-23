@@ -6,6 +6,8 @@ import { FormWrap } from '../../components/FormWrap';
 import { useHistory } from 'react-router-dom';
 import { StyledCheckbox } from '../../components/StyledCheckbox';
 import './styles.css'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { setStatus } from '../../redux/actions';
 
 const StatusPage = () => {
    const [values, setValues] = useState({
@@ -16,25 +18,27 @@ const StatusPage = () => {
       checkedE: false,
    });
    const history = useHistory();
+   const dispatch = useDispatch();
+   const status = useSelector(state => state.status, shallowEqual);
+   const employment = useSelector(state => state.employment, shallowEqual);
    useEffect(() => {
-      if (localStorage.getItem('status')) {
-         const objValues = JSON.parse(localStorage.getItem('status'));
-         setValues(objValues)
+      if (Object.keys(status).length !== 0) {
+         setValues(status)
       }
-   }, [])
+   }, [status])
    const handleChange = (event) => {
-      setValues({ ...values, [event.target.name]: event.target.checked });
+      const newVals = { ...values, [event.target.name]: event.target.checked }
+      setValues(newVals);
+      dispatch(setStatus(newVals))
    };
 
    const onClickNext = () => {
-      localStorage.setItem('status', JSON.stringify(values));
       if (Object.values(values).includes(true)) {
          history.push(`/confirm`);
       }
    }
    const onClickBack = () => {
-      localStorage.setItem('status', JSON.stringify(values));
-      if (localStorage.getItem('employment') !== 'selfEmployed') {
+      if (employment !== 'selfEmployed') {
          history.push('/')
       }
       else {

@@ -3,21 +3,26 @@ import ProgressBar from '../../components/ProgressBar';
 import NavigationBottom from '../../components/NavigationBottom';
 import { useHistory } from 'react-router-dom';
 import './styles.css'
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { setProprietorships } from '../../redux/actions';
 
 const ProprietorshipsPage = () => {
-   const [numbers, setNumbers] = useState('');
+   const dispatch = useDispatch();
    const history = useHistory();
+   const storedNum = useSelector(state => state.proprietorships, shallowEqual);
+   const [numbers, setNumbers] = useState('');
    useEffect(() => {
-      if (numbers === '') {
-         setNumbers(localStorage.getItem('proprietorships'))
+      if (storedNum !== '') {
+         setNumbers(storedNum)
       }
-   }, [])
+   }, [storedNum])
    const handleChange = (event) => {
-      setNumbers(event.target.value);
+      const val = event.target.value;
+      setNumbers(val);
+      dispatch(setProprietorships(val));
    }
    const onClickNext = () => {
       if (numbers !== '') {
-         localStorage.setItem('proprietorships', numbers)
          history.push(`/status`)
       }
    }

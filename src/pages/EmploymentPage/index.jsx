@@ -6,29 +6,32 @@ import { RadioGroup, FormControlLabel } from '@material-ui/core';
 import { FormWrap } from '../../components/FormWrap'
 import { GreenRadio } from '../../components/RadioButton'
 import NavigationBottom from '../../components/NavigationBottom';
-
-
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { setEmployment } from '../../redux/actions';
 
 const EmploymentPage = () => {
+   const employment = useSelector(state => state.employment, shallowEqual);
+   const dispatch = useDispatch()
    const history = useHistory();
    const [value, setValue] = useState('');
    const handleChange = (event) => {
-      setValue(event.target.value);
+      const val = event.target.value
+      setValue(val);
+      dispatch(setEmployment(val))
    };
    useEffect(() => {
-      if (localStorage.getItem('employment')) {
-         setValue(localStorage.getItem('employment'))
-      } else {
-         setValue('employed')
+      if (employment !== '') {
+         setValue(employment)
       }
-   }, [])
+   }, [employment])
 
    const onClickNext = () => {
-      localStorage.setItem('employment', value);
-      value === 'selfEmployed' ?
-         history.push('/proprietorships')
-         :
-         history.push('/status')
+      if (value !== '') {
+         value === 'selfEmployed' ?
+            history.push('/proprietorships')
+            :
+            history.push('/status')
+      }
    }
 
    return (

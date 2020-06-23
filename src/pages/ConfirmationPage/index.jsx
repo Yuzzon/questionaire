@@ -4,15 +4,16 @@ import { BlueButton } from '../../components/RadioButton';
 import './styles.css'
 import NavigationBottom from '../../components/NavigationBottom';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const ConfirmationPage = () => {
    const history = useHistory();
    const handleSubmit = () => {
       //submit code to be here
    };
-   const employment = localStorage.getItem('employment');
-   const numberOfEmpl = localStorage.getItem('proprietorships');
-   const status = JSON.parse(localStorage.getItem('status'));
+   const employment = useSelector(state => state.employment);
+   const numberOfEmpl = Number(useSelector(state => state.proprietorships));
+   const status = useSelector(state => state.status);
 
    const calcResult = () => {
       let res = 0;
@@ -31,7 +32,7 @@ const ConfirmationPage = () => {
       }
 
       const arrOfVals = Object.values(status);
-      const statusQty = arrOfVals.filter(el => el === true).length
+      const statusQty = arrOfVals.filter(el => el === true).length;
 
       if (statusQty === 1) {
          res += 10
